@@ -1,0 +1,40 @@
+<!-- Main Section -->
+<main>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="news">
+            {{#if result}}
+                {{#each result}}
+                    <div class="article container well">
+                        <div class="row">
+                            <div class="col-md-3">
+                                {{#if this.image}}
+                                    <a href="{{this.link}}"><img src="{{this.image}}" class="center-block article-image"></a>
+                                {{/if}}
+                            </div>
+                            <div class="col-md-8 article-info">
+                                <div class="article-name">
+                                    <a href="{{link}}"><h4>{{this.title}}</h4></a>
+                                    <p>{{this.story}}</p>
+                                </div>
+                                {{!-- Link to comments page here, pass title as reference --}}
+                                <div class="comment-link">
+                                    <a href="/{{this.title}}">Comments</a>
+                                </div>
+                            </div>
+                            <div class="col-md-1 save_del">
+                                <form action="/savedArticles/?_method=DELETE" method="POST">
+                                  <input type="hidden" name="article" value="{{this.title}}">
+                                  <button class="btn btn-success" type="submit">Delete!</button>
+                                  <br>
+                                </form>
+                            </div>
+                            
+                        </div>
+                    </div>
+                {{/each}}
+            {{/if}}
+            </div>
+        </div>
+    </div>
+</main>

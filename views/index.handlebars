@@ -1,0 +1,34 @@
+<!-- Main Section -->
+<main>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="news">
+                {{#each result}}
+                    <div class="article container well">
+                        <div class="row">
+                            <div class="col-md-3">
+                                {{#if this.image}}
+                                    <a href="{{this.link}}"><img src="{{this.image}}" class="center-block article-image"></a>
+                                {{/if}}
+                            </div>
+                            <div class="col-md-9 article-info">
+                                <div class="article-name">
+                                    <a href="{{this.link}}"><h4>{{this.title}}</h4></a>
+                                    <p>{{this.story}}</p>
+                                </div>
+                                <div class="save_del">
+                                    <form action="/savedArticles/" method="POST">
+                                      <input type="hidden" name="article" value="{{this.title}}${{this.link}}${{this.story}}${{this.image}}">
+                                      <button class="btn btn-success" type="submit">Save!</button>
+                                      <br>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</main>
