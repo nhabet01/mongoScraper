@@ -44,7 +44,10 @@ app.set('view engine', 'handlebars');
 app.use(express.static("public"));
 
 // Database configuration with mongoose
-mongoose.connect("mongodb://localhost/mongoscraperdb");
+// mongoose.connect("mongodb://localhost/mongoscraperdb");
+
+
+
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -58,21 +61,21 @@ db.once("open", function() {//===========================needed in production?
 });
 
 // Determine whether to use local or remote database connection.========production
-// var connectionString;
-// if (process.env.PORT) {
-//     connectionString = '';
-// } else {
-//     connectionString = 'mongodb://localhost/mongoscraperdb';
-// }
+var connectionString;
+if (process.env.PORT) {
+    connectionString = 'mongodb://heroku_6117srk8:so0sa15d3m5enc2ncp2okqh76n@ds121091.mlab.com:21091/heroku_6117srk8';
+} else {
+    connectionString = 'mongodb://localhost/mongoscraperdb';
+}
 
 // Start listening.=================================================production
-// mongoose.connect(connectionString).then(function() {
-//     app.listen(PORT, function() {
-//         console.log('listening on port ' + PORT);
-//     });
-// });
-
-// Listen 
-app.listen(PORT, function() {
-  console.log("App running on port: "+ PORT);
+mongoose.connect(connectionString).then(function() {
+    app.listen(PORT, function() {
+        console.log('listening on port ' + PORT);
+    });
 });
+
+// // Listen 
+// app.listen(PORT, function() {
+//   console.log("App running on port: "+ PORT);
+// });
